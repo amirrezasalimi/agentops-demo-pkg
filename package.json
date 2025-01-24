@@ -1,0 +1,51 @@
+{
+  "name": "agentops-demo",
+  "version": "0.0.1",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "globals": "^15.14.0",
+    "typescript-eslint": "^8.21.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "build:cjs": "bun build src/index.ts --outdir dist/cjs --format cjs",
+    "build:esm": "bun build src/index.ts --outdir dist/esm --format esm",
+    "build:types": "bunx tsc --emitDeclarationOnly --project tsconfig.json",
+    "build": "npm run build:cjs && npm run build:esm && npm run build:types",
+    "lint": "eslint .",
+    "format": "prettier --write ./src"
+  },
+  "exports": {
+    ".": {
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      },
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/esm/index.js"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/sdk-trace-base": "^1.30.1",
+    "async-mutex": "^0.5.0",
+    "chalk": "^5.4.1",
+    "eslint": "^9.18.0",
+    "openai": "^4.80.0",
+    "prettier": "^3.4.2",
+    "systeminformation": "^5.25.11",
+    "uuid": "^11.0.5",
+    "winston": "^3.17.0"
+  }
+}
